@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_chart/screens/home.dart';
+import 'lineChart/home.dart';
 
 void main() {
   runApp( MaterialApp(
