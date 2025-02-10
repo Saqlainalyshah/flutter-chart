@@ -16,6 +16,28 @@ class Example2 extends StatelessWidget {
           height: 300,
           child: BarChart(
               BarChartData(
+                barTouchData: BarTouchData(
+                  enabled: false,
+                  touchTooltipData: BarTouchTooltipData(
+                    getTooltipColor: (group) => Colors.transparent,
+                    tooltipPadding: EdgeInsets.zero,
+                    tooltipMargin: 8,
+                    getTooltipItem: (
+                        BarChartGroupData group,
+                        int groupIndex,
+                        BarChartRodData rod,
+                        int rodIndex,
+                        ) {
+                      return BarTooltipItem(
+                        rod.toY.round().toString(),
+                        const TextStyle(
+                          fontWeight: FontWeight.bold,
+                        ),
+                      );
+                    },
+                  ),
+                ),
+
                 gridData: FlGridData(show: false),
                 borderData: FlBorderData(
                   border: Border(
@@ -32,18 +54,23 @@ class Example2 extends StatelessWidget {
                     bottomTitles: AxisTitles(sideTitles: SideTitles(showTitles: true,
                         getTitlesWidget: (value,metaData){
                       int index=value.toInt();
-                    return Expanded(child: Text(apiRes!.data![index].name.toString().substring(0,5)));
+                    return Text(apiRes!.data![index].year.toString());
                     }
                     ))
                 ),
                 barGroups: [
-                  ...List.generate(apiRes!.data!.length, (index)=>BarChartGroupData(
+                  ...List.generate(apiRes!.data!.length, (index)=>
+                      BarChartGroupData(
                     groupVertically: true,
+                    showingTooltipIndicators: [0],
                     x: index,
                     barRods: [
-                      BarChartRodData(toY: apiRes!.data![index].id?.toDouble()??2.0)
+                      BarChartRodData(toY: apiRes!.data![index].id?.toDouble()??2.0,
+                        color: Colors.blueAccent,
+
+                      ),
                     ]
-                  ))
+                  )),
                 ]
           )),
         ),
