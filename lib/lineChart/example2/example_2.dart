@@ -21,7 +21,7 @@ class Example2 extends StatelessWidget {
                   touchTooltipData: BarTouchTooltipData(
                     getTooltipColor: (group) => Colors.transparent,
                     tooltipPadding: EdgeInsets.zero,
-                    tooltipMargin: 8,
+                    tooltipMargin: 0,
                     getTooltipItem: (
                         BarChartGroupData group,
                         int groupIndex,
@@ -30,6 +30,11 @@ class Example2 extends StatelessWidget {
                         ) {
                       return BarTooltipItem(
                         rod.toY.round().toString(),
+                        children: [  TextSpan(
+                          text: " PM",
+                          style:TextStyle(fontWeight
+                          : FontWeight.bold,
+                        )),],
                         const TextStyle(
                           fontWeight: FontWeight.bold,
                         ),
@@ -65,7 +70,14 @@ class Example2 extends StatelessWidget {
                     showingTooltipIndicators: [0],
                     x: index,
                     barRods: [
-                      BarChartRodData(toY: apiRes!.data![index].id?.toDouble()??2.0,
+                      BarChartRodData(
+                        width: 30.0,
+                        backDrawRodData: BackgroundBarChartRodData(
+                          toY: 15,
+                          show: true,
+                          color: Colors.grey.shade200
+                        ),
+                        toY: apiRes!.data![index].id?.toDouble()??2.0,
                         color: Colors.blueAccent,
 
                       ),
